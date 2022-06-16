@@ -1,18 +1,20 @@
-from flask import Flask, render_template
+import requests
+import flask
+from flask_cors import CORS
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
+CORS(app, resources=r'/*')
 
-
-@app.route('/')
-def hello():
-    return 'Hello, world'
-
-
-@app.route('/test')
-def test():
-    return 'Test'
-
-@app.route('/result')
-def result():
-   dict = {'phy':50,'che':60,'maths':70}
-   return render_template('result.html', result = dict)
+@app.route('/github/<path:ghpath>', methods=["GET", "POST"])
+def github(ghpath):
+    url = 'https://github.com/{}'.format(ghpath)
+    params = {
+        'client_id': flask.request.json['client_id'],
+        'client_secret': flask.request.json['client_secret'],
+        'code': flask.request.json['code']
+    }
+    headers = {
+        'accept': 'application/json'
+    }
+    result = requests.post(url=url, params=params, headers=headers, verify=False)
+    return result.json()
