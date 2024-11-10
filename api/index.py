@@ -6,7 +6,7 @@ app = flask.Flask(__name__)
 CORS(app, resources=r'/*')
 
 @app.route('/hitokoto', methods=["GET"])
-def github(ghpath):
+def github():
     url = 'https://v1.hitokoto.cn/'
     headers = {
         'accept': '*/*',
