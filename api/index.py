@@ -9,7 +9,10 @@ CORS(app, resources=r'/*')
 def github(ghpath):
     url = 'https://v1.hitokoto.cn/'
     headers = {
-        'accept': 'application/json'
+        'accept': '*/*',
+        "origin": "http://localhost:4000",
+        "referer": "http://localhost:4000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
     }
     result = requests.get(url=url, headers=headers, verify=False)
     return result.json()
