@@ -7,7 +7,7 @@ CORS(app, resources=r'/*')
 
 # 解决文心一言跨域
 @app.route('/hitokoto', methods=["GET"])
-def github():
+def hitokoto():
     url = 'https://v1.hitokoto.cn/'
     headers = {
         'accept': '*/*',
